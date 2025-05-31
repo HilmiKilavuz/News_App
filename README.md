@@ -50,7 +50,7 @@ Uygulama, aşağıdaki MVVM (Model-View-ViewModel) mimari yapısını takip eder
 ## Kurulum
 
 1. Projeyi klonlayın
-2. `local.properties` dosyasına `NEWS_API_KEY="your_api_key_here"` ekleyin
+2. api keyinizi  ekleyin
 3. Android Studio'da projeyi açın ve çalıştırın
 
 ## API
@@ -111,7 +111,7 @@ The application follows the MVVM (Model-View-ViewModel) architectural pattern:
 ## Installation
 
 1. Clone the project
-2. Add `NEWS_API_KEY="your_api_key_here"` to the `local.properties` file
+2. Add your api key file
 3. Open the project in Android Studio and run
 
 ## API
