@@ -53,7 +53,7 @@ Uygulama, aşağıdaki MVVM (Model-View-ViewModel) mimari yapısını takip eder
 
 1. Projeyi klonlayın
    ```
-   git clone https://github.com/username/News_App.git
+   git clone https://github.com/HilmiKilavuz/News_App.git
    ```
 
 2. API anahtarınızı ekleyin
@@ -132,7 +132,7 @@ The application follows the MVVM (Model-View-ViewModel) architectural pattern:
 
 1. Clone the project
    ```
-   git clone https://github.com/username/News_App.git
+   git clone https://github.com/HilmiKilavuz/News_App.git
    ```
 
 2. Add your API key
@@ -152,4 +152,4 @@ This application uses [News API](https://newsapi.org/) for news data. You need a
 
 For security reasons, the API key is not stored directly in the code. Instead, it is defined in the `gradle.properties` file and accessed via BuildConfig.
 
-If you need to change the API key, simply update the `NEWS_API_KEY` value in the `gradle.properties` file. 
+If you need to change the API key, simply update the `NEWS_API_KEY` value in the `gradle.properties` file.
