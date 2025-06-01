@@ -1,10 +1,19 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     kotlin("plugin.parcelize")
+}
 
-
+// Local properties dosyasını yüklemek için
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        load(FileInputStream(localPropertiesFile))
+    }
 }
 
 android {
@@ -23,9 +32,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        val apiKey = project.properties["NEWS_API_KEY"] as? String ?: ""
+        // Local properties dosyasından API anahtarını al
+        val apiKey = localProperties.getProperty("NEWS_API_KEY") ?: ""
         buildConfigField("String", "NEWS_API_KEY", "\"$apiKey\"")
-
     }
 
     buildTypes {
@@ -99,6 +108,6 @@ dependencies {
 // API anahtarını kontrol etmek için görev ekleyelim
 tasks.register("printApiKey") {
     doLast {
-        println("NEWS_API_KEY from properties: ${project.properties["NEWS_API_KEY"]}")
+        println("NEWS_API_KEY from local.properties: ${localProperties.getProperty("NEWS_API_KEY")}")
     }
 }
