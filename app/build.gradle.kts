@@ -23,7 +23,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "NEWS_API_KEY", "\"${project.properties["NEWS_API_KEY"]}\"")
+        val apiKey = project.properties["NEWS_API_KEY"] as? String ?: ""
+        buildConfigField("String", "NEWS_API_KEY", "\"$apiKey\"")
 
     }
 
@@ -49,6 +50,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -70,6 +72,7 @@ dependencies {
     // Retrofit & JSON Parsing
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
 // Coroutines (network işlemleri için)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
@@ -91,4 +94,11 @@ dependencies {
 
 
 
+}
+
+// API anahtarını kontrol etmek için görev ekleyelim
+tasks.register("printApiKey") {
+    doLast {
+        println("NEWS_API_KEY from properties: ${project.properties["NEWS_API_KEY"]}")
+    }
 }

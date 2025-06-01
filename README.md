@@ -16,6 +16,7 @@ Bu uygulama, kullanıcılara güncel haberleri sunan modern bir Android uygulama
 - **Coil**: Resim yükleme
 - **Jetpack ViewModel**: UI durumunu yönetmek için
 - **BuildConfig**: API anahtarlarını güvenli şekilde saklamak için
+- **OkHttp Logging Interceptor**: HTTP isteklerini loglamak için
 
 ## Mimari Yapı
 
@@ -44,18 +45,35 @@ Uygulama, aşağıdaki MVVM (Model-View-ViewModel) mimari yapısını takip eder
 
 - Güncel haberleri görüntüleme
 - Haber detaylarını inceleme
-- Kategori bazlı haber filtreleme
+- Haberlerde arama yapma
+- Anahtar kelimeye göre filtreleme
 - Haber kaynağına gitme
 
 ## Kurulum
 
 1. Projeyi klonlayın
-2. `local.properties` dosyasına `NEWS_API_KEY="your_api_key_here"` ekleyin
+   ```
+   git clone https://github.com/username/News_App.git
+   ```
+
+2. API anahtarınızı ekleyin
+   - [News API](https://newsapi.org/) üzerinden bir API anahtarı edinin
+   - `gradle.properties` dosyasına API anahtarınızı ekleyin:
+   ```
+   NEWS_API_KEY=sizin_api_anahtariniz
+   ```
+   
+   > NOT: `gradle.properties` dosyası Git tarafından izlenmez, bu yüzden API anahtarınız güvendedir.
+
 3. Android Studio'da projeyi açın ve çalıştırın
 
-## API
+## API Anahtarı Hakkında
 
-Bu uygulama [News API](https://newsapi.org/) kullanmaktadır. Uygulama çalıştırmak için geçerli bir API anahtarına ihtiyacınız vardır.
+Bu uygulama, haber verileri için [News API](https://newsapi.org/) kullanmaktadır. Uygulamayı çalıştırmak için geçerli bir API anahtarına ihtiyacınız vardır.
+
+API anahtarı, güvenlik açısından doğrudan kodda saklanmamaktadır. Bunun yerine, BuildConfig aracılığıyla erişilen `gradle.properties` dosyasında tanımlanır.
+
+Eğer API anahtarını değiştirmeniz gerekirse, sadece `gradle.properties` dosyasındaki `NEWS_API_KEY` değerini güncelleyin.
 
 ---
 
@@ -77,6 +95,7 @@ This application is a modern Android app that provides users with current news. 
 - **Coil**: Image loading
 - **Jetpack ViewModel**: For managing UI state
 - **BuildConfig**: For securely storing API keys
+- **OkHttp Logging Interceptor**: For logging HTTP requests
 
 ## Architectural Structure
 
@@ -105,15 +124,32 @@ The application follows the MVVM (Model-View-ViewModel) architectural pattern:
 
 - View current news
 - Examine news details
-- Filter news by category
+- Search in news
+- Filter by keyword
 - Navigate to news source
 
 ## Installation
 
 1. Clone the project
-2. Add `NEWS_API_KEY="your_api_key_here"` to the `local.properties` file
+   ```
+   git clone https://github.com/username/News_App.git
+   ```
+
+2. Add your API key
+   - Get an API key from [News API](https://newsapi.org/)
+   - Add your API key to the `gradle.properties` file:
+   ```
+   NEWS_API_KEY=your_api_key
+   ```
+   
+   > NOTE: The `gradle.properties` file is not tracked by Git, so your API key is secure.
+
 3. Open the project in Android Studio and run
 
-## API
+## About API Key
 
-This application uses the [News API](https://newsapi.org/). You need a valid API key to run the application. 
+This application uses [News API](https://newsapi.org/) for news data. You need a valid API key to run the application.
+
+For security reasons, the API key is not stored directly in the code. Instead, it is defined in the `gradle.properties` file and accessed via BuildConfig.
+
+If you need to change the API key, simply update the `NEWS_API_KEY` value in the `gradle.properties` file. 
