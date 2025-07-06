@@ -22,7 +22,7 @@ import com.kilavuzhilmi.news_app.model.Article
 import com.kilavuzhilmi.news_app.viewmodel.functions.FormatDate
 
 @Composable
-fun NewsItem(article: Article, onItemClick: () -> Unit) {
+fun NewsItem(article: Article, onItemClick: () -> Unit, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth().defaultMinSize(minHeight = 300.dp )

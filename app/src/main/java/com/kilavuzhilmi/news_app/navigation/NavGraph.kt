@@ -33,6 +33,7 @@ fun NavGraph(
         composable("newsList") {
             NewsScreen(navController = navController)
 
+
         }
         composable(
             route = "newsDetail/{article}",

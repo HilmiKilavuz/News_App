@@ -14,16 +14,20 @@ import com.kilavuzhilmi.news_app.services.RetrofitInstance
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class NewsViewModel : ViewModel() {
+    private val _searchHistory = MutableStateFlow<List<String>>(emptyList())
+    val searchHistory = _searchHistory.asStateFlow()
+
     private val _articles = MutableStateFlow<List<Article>>(emptyList())
     val articles: StateFlow<List<Article>> = _articles
 
     private val _searchQuery = MutableStateFlow("")
-    val searchQuery: StateFlow<String> = _searchQuery
+    val searchQuery = _searchQuery.asStateFlow()
 
 
     var newsList by mutableStateOf<List<Article>>(emptyList())
@@ -32,6 +36,23 @@ class NewsViewModel : ViewModel() {
 
     init {
         fetchNews()
+    }
+
+
+    fun clearSearchHistory(){
+        _searchHistory.value=emptyList()
+    }
+    fun removeSearchHistory(query: String){
+        _searchHistory.value = _searchHistory.value.filterNot { it == query }
+    }
+    fun onSearchQueryChange(newQuery: String) {
+        _searchQuery.value = newQuery
+    }
+
+    fun addSearchToHistory(query: String) {
+        if (query.isNotBlank() && !_searchHistory.value.contains(query)) {
+            _searchHistory.value = listOf(query) + _searchHistory.value
+        }
     }
 
     val filteredArticles: StateFlow<List<Article>> =
@@ -71,7 +92,7 @@ class NewsViewModel : ViewModel() {
             try {
                 Log.d("NewsViewModel", "Fetching news...")
                 Log.d("NewsViewModel", "BuildConfig API Key: ${BuildConfig.NEWS_API_KEY}")
-                
+
                 val response = RetrofitInstance.api.getTopHeadlines(
                     country = "us",
                     apiKey = BuildConfig.NEWS_API_KEY
